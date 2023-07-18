@@ -66,24 +66,4 @@ public class AppUserController {
         appUserService.deleteAppUser(id);
         return "Deleted user with id "+id;
     }
-
-//    @GetMapping("/login")
-//    public ResponseEntity<List<String>> updateAppUser(@RequestBody String username, @RequestBody String password){
-//        try{
-////            Student existingStudent = studentService.StudentGet(id);
-//            AppUser appUserNew = appUserService.updateAppUser(id,appUser);
-////            return new ResponseEntity<>(HttpStatus.OK);
-//            return ResponseEntity.ok().body(appUserNew);
-//        }catch (NoSuchElementException e){
-//            return new ResponseEntity<AppUser>(HttpStatus.NOT_FOUND);
-//        }
-//    }
-//    public void refreshToken (HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
-//        String access_token = JWT.create()
-//                .withSubject(request.)
-//                .withExpiresAt(new Date(System.currentTimeMillis()+1000*60*1000))
-//                .withIssuer(request.getRequestURL().toString())
-//                .sign(algorithm);
-//    }
 }
