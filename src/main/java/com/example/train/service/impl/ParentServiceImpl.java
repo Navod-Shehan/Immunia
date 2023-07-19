@@ -23,6 +23,7 @@ public class ParentServiceImpl implements ParentService {
     public Parent saveParentUser(Parent parent){
         log.info("Saving parent {} to the database",parent.getFirstName());
         parent.setPassword(passwordEncoder.encode(parent.getPassword()));
+        parent.setUserRole("parent"); // Set the userRole as "parent"
         return parentRepository.save(parent);
     }
     public List<Parent> getParentUsers(){
