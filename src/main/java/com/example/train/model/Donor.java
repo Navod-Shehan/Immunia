@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,4 +21,7 @@ public class Donor {
     private String contactNumber;
     private String email;
     private String donateFor;
+
+    @OneToMany(mappedBy = "donor", cascade = CascadeType.ALL)
+    private List<Donation> donations;
 }

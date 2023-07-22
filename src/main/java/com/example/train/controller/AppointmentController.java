@@ -37,4 +37,5 @@ public class AppointmentController {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/appointment/save").toUriString());
         return ResponseEntity.created(uri).body(appointmentService.saveAppointment(appointment));
     }
+
 }

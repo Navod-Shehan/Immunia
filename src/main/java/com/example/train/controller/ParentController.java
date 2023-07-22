@@ -1,6 +1,7 @@
 package com.example.train.controller;
 
 import com.example.train.model.Parent;
+import com.example.train.repository.ParentRepository;
 import com.example.train.service.ParentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -9,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.net.URI;
 import java.util.List;
 
@@ -20,6 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ParentController {
     private final ParentService parentService;
+    private final ParentRepository parentRepository;
     @ApiOperation(value = "all parents", notes = "Get all parents")
     @GetMapping("/")
     public ResponseEntity<List<Parent>> getParentUsers(){
