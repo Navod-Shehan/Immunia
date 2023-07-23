@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Data
@@ -25,4 +27,7 @@ public class Child {
     @ManyToOne
     @JoinColumn(name = "id")
     private Parent parent;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    Collection<Appointment> appointments = new ArrayList<>();
 }

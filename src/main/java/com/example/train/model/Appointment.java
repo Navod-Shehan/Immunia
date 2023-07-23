@@ -28,4 +28,8 @@ public class Appointment {
     @ManyToOne
     @JoinColumn(name = "id")
     private Parent parent;
+
+    @ManyToOne
+    @JoinColumn(name = "childId", referencedColumnName = "childId")
+    private Child child;
 }
