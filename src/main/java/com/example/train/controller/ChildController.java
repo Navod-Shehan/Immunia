@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Api(tags = "Child")
 @RestController
@@ -31,6 +32,11 @@ public class ChildController {
         return new ResponseEntity<Child>(childService.getChild(id), HttpStatus.OK);
     }
 
+    @GetMapping("/appointment/{id}")
+    public ResponseEntity<Child> getChildWithAppointments(@PathVariable Long id){
+        return new ResponseEntity<Child>(childService.getChildWithAppointments(id), HttpStatus.OK);
+    }
+
     @PostMapping("/save")
     public ResponseEntity<Child> saveChild(@RequestBody Child child){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/child/save").toUriString());
@@ -38,14 +44,14 @@ public class ChildController {
     }
 
 //    @PutMapping("/update/{id}")
-//    public ResponseEntity<AppUser> updateAppUser(@RequestBody AppUser appUser, @PathVariable Long id){
+//    public ResponseEntity<Child> updateChild(@RequestBody Child child, @PathVariable Long id){
 //        try{
 ////            Student existingStudent = studentService.StudentGet(id);
-//            AppUser appUserNew = parentRepository.updateAppUser(id,appUser);
+//            Child appUserNew = childService.updateChild(id,child);
 ////            return new ResponseEntity<>(HttpStatus.OK);
 //            return ResponseEntity.ok().body(appUserNew);
 //        }catch (NoSuchElementException e){
-//            return new ResponseEntity<AppUser>(HttpStatus.NOT_FOUND);
+//            return new ResponseEntity<Child>(HttpStatus.NOT_FOUND);
 //        }
 //    }
 

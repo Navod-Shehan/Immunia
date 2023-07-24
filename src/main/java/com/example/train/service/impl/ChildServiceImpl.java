@@ -1,5 +1,6 @@
 package com.example.train.service.impl;
 
+import com.example.train.model.AppUser;
 import com.example.train.model.Child;
 import com.example.train.repository.ChildRepository;
 import com.example.train.service.ChildService;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -31,4 +34,16 @@ public class ChildServiceImpl implements ChildService {
         log.info("Delete child {} from database",id);
         childRepository.deleteById(id);
     }
+    public Child getChildWithAppointments(Long childId){
+        return childRepository.findByChildId(childId);
+    }
+
+//    public Child updateChild(Long id, Child child){
+//        Child existingAppUser = childRepository.findById(id).get();
+//
+//        if(Objects.nonNull(child.getContactNumber()) && !"".equalsIgnoreCase(child.getContactNumber())){
+//            existingAppUser.setContactNumber(appUser.getContactNumber());
+//        }
+//        return childRepository.save(existingAppUser);
+//    }
 }

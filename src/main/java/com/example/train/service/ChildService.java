@@ -10,4 +10,5 @@ public interface ChildService {
     List<Child> getChildren();
     Child getChild(Long id);
     void deleteChild(Long id);
+    Child getChildWithAppointments(Long childId);
 }
