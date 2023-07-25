@@ -17,7 +17,7 @@ import java.util.List;
 @Api(tags = "Admin")
 @RestController
 @RequestMapping("/api/admin")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000/")
 @RequiredArgsConstructor
 public class AdminController {
     private final AdminService adminService;

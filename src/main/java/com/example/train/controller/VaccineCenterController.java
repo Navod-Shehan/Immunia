@@ -16,7 +16,7 @@ import java.util.List;
 @Api(tags = "center")
 @RestController
 @RequestMapping("/api/center")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000/")
 @RequiredArgsConstructor
 public class VaccineCenterController {
     private final VaccineCenterService vaccineCenterService;

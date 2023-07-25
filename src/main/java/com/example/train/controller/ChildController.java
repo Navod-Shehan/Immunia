@@ -17,7 +17,7 @@ import java.util.NoSuchElementException;
 @Api(tags = "Child")
 @RestController
 @RequestMapping("/api/child")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000/")
 @RequiredArgsConstructor
 public class ChildController {
     private final ChildService childService;

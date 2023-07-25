@@ -16,7 +16,7 @@ import java.util.List;
 @Api(tags = "Parent")
 @RestController
 @RequestMapping("/api/parent")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000/")
 @RequiredArgsConstructor
 public class ParentController {
     private final ParentService parentService;

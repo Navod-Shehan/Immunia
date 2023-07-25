@@ -27,7 +27,7 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 @Api(tags = "User")
 @RestController
 @RequestMapping("/api/user")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000/")
 @RequiredArgsConstructor
 public class AppUserController {
     private final AppUserService appUserService;
