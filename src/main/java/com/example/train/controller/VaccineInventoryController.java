@@ -16,7 +16,7 @@ import java.util.List;
 @Api(tags = "VaccineInventory")
 @RestController
 @RequestMapping("/api/vaccineInventory")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class VaccineInventoryController {
     private final VaccineInventoryService vaccineInventoryService;

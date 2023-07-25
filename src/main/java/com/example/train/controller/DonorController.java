@@ -16,7 +16,7 @@ import java.util.List;
 @Api(tags = "Donor")
 @RestController
 @RequestMapping("/api/donor")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class DonorController {
     private final DonorService donorService;

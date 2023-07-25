@@ -29,7 +29,10 @@ public class Appointment {
     @JoinColumn(name = "id")
     private Parent parent;
 
+
     @ManyToOne
     @JoinColumn(name = "childId", referencedColumnName = "childId")
     private Child child;
+
+
 }
