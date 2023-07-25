@@ -1,5 +1,6 @@
 package com.example.train.service;
 
+import com.example.train.model.Appointment;
 import com.example.train.model.Donation;
 import com.example.train.model.Parent;
 
@@ -9,4 +10,6 @@ public interface DonationService {
     Donation saveDonation(Donation donation);
     List<Donation> getDonations();
     Donation getDonation(Long id);
+
+    Donation updateDonation(Long id, Donation donation);
 }

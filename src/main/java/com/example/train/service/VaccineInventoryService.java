@@ -1,5 +1,6 @@
 package com.example.train.service;
 
+import com.example.train.model.AppUser;
 import com.example.train.model.Parent;
 import com.example.train.model.VaccineInventory;
 
@@ -10,4 +11,6 @@ public interface VaccineInventoryService {
     List<VaccineInventory> getVaccineInventories();
     VaccineInventory getVaccineInventory(Long id);
     void deleteVaccineInventory(Long id);
+
+    VaccineInventory updateVaccineInventory(Long id, VaccineInventory vaccineInventory);
 }

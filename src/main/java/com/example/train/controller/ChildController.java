@@ -43,17 +43,17 @@ public class ChildController {
         return ResponseEntity.created(uri).body(childService.saveChild(child));
     }
 
-//    @PutMapping("/update/{id}")
-//    public ResponseEntity<Child> updateChild(@RequestBody Child child, @PathVariable Long id){
-//        try{
-////            Student existingStudent = studentService.StudentGet(id);
-//            Child appUserNew = childService.updateChild(id,child);
-////            return new ResponseEntity<>(HttpStatus.OK);
-//            return ResponseEntity.ok().body(appUserNew);
-//        }catch (NoSuchElementException e){
-//            return new ResponseEntity<Child>(HttpStatus.NOT_FOUND);
-//        }
-//    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Child> updateChild(@RequestBody Child child, @PathVariable Long id){
+        try{
+//            Student existingStudent = studentService.StudentGet(id);
+            Child childNew = childService.updateChild(id,child);
+//            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.ok().body(childNew);
+        }catch (NoSuchElementException e){
+            return new ResponseEntity<Child>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @DeleteMapping("/delete/{id}")
     public String deleteChild(@PathVariable Long id){

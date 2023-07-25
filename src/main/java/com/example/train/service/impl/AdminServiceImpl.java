@@ -1,6 +1,7 @@
 package com.example.train.service.impl;
 
 import com.example.train.model.Admin;
+import com.example.train.model.Child;
 import com.example.train.repository.AdminRepository;
 import com.example.train.service.AdminService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -35,5 +37,16 @@ public class AdminServiceImpl implements AdminService {
     public void deleteAdminUser(Long id){
         log.info("Delete admin {} from database",id);
         adminRepository.deleteById(id);
+    }
+
+    public Admin updateAdmin(Long id, Admin admin){
+        Admin existingAdmin = adminRepository.findById(id).get();
+
+        if(Objects.nonNull(admin.getFirstName()) && !"".equalsIgnoreCase(admin.getFirstName())){
+            existingAdmin.setFirstName(admin.getFirstName());
+        } else if (Objects.nonNull(admin.getLastName()) && !"".equalsIgnoreCase(admin.getLastName())) {
+            existingAdmin.setLastName(admin.getLastName());
+        }
+        return adminRepository.save(existingAdmin);
     }
 }

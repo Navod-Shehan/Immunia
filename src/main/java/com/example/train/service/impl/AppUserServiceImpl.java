@@ -1,7 +1,8 @@
-package com.example.train.service;
+package com.example.train.service.impl;
 
 import com.example.train.model.AppUser;
 import com.example.train.repository.AppUserRepository;
+import com.example.train.service.AppUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -47,6 +48,10 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
 
         if(Objects.nonNull(appUser.getContactNumber()) && !"".equalsIgnoreCase(appUser.getContactNumber())){
             existingAppUser.setContactNumber(appUser.getContactNumber());
+        } else if (Objects.nonNull(appUser.getPassword()) && !"".equalsIgnoreCase(appUser.getPassword())) {
+            existingAppUser.setPassword(appUser.getPassword());
+        } else if (Objects.nonNull(appUser.getEmail()) && !"".equalsIgnoreCase(appUser.getEmail())) {
+            existingAppUser.setEmail(appUser.getEmail());
         }
         return appUserRepository.save(existingAppUser);
     }

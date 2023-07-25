@@ -1,6 +1,7 @@
 package com.example.train.service.impl;
 
 import com.example.train.model.Donor;
+import com.example.train.model.Parent;
 import com.example.train.model.Schedule;
 import com.example.train.repository.ScheduleRepository;
 import com.example.train.service.ScheduleService;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -32,5 +34,16 @@ public class ScheduleImpl implements ScheduleService {
     public void deleteSchedule(Long id){
         log.info("Delete user {} from database",id);
         scheduleRepository.deleteById(id);
+    }
+
+    public Schedule updateSchedule(Long id, Schedule schedule){
+        Schedule  existingSchedule = scheduleRepository.findById(id).get();
+
+        if(Objects.nonNull(schedule.getEndTime()) && !"".equalsIgnoreCase(schedule.getEndTime())){
+            existingSchedule.setEndTime(schedule.getStartTime());
+        } else if (Objects.nonNull(schedule.getStartTime()) && !"".equalsIgnoreCase(schedule.getStartTime())) {
+            existingSchedule.setStartTime(schedule.getEndTime());
+        }
+        return scheduleRepository.save(existingSchedule);
     }
 }

@@ -38,12 +38,22 @@ public class ChildServiceImpl implements ChildService {
         return childRepository.findByChildId(childId);
     }
 
-//    public Child updateChild(Long id, Child child){
-//        Child existingAppUser = childRepository.findById(id).get();
-//
-//        if(Objects.nonNull(child.getContactNumber()) && !"".equalsIgnoreCase(child.getContactNumber())){
-//            existingAppUser.setContactNumber(appUser.getContactNumber());
-//        }
-//        return childRepository.save(existingAppUser);
-//    }
+    public Child updateChild(Long id, Child child){
+        Child existingChild = childRepository.findById(id).get();
+
+        if(Objects.nonNull(child.getVaccinationCardNumber()) && !"".equalsIgnoreCase(child.getVaccinationCardNumber())){
+            existingChild.setVaccinationCardNumber(child.getVaccinationCardNumber());
+        } else if (Objects.nonNull(child.getFirstName()) && !"".equalsIgnoreCase(child.getFirstName())) {
+            existingChild.setFirstName(child.getFirstName());
+        } else if (Objects.nonNull(child.getLastName()) && !"".equalsIgnoreCase(child.getLastName())) {
+            existingChild.setLastName(child.getLastName());
+        } else if (Objects.nonNull(child.getGender()) && !"".equalsIgnoreCase(child.getGender())) {
+            existingChild.setGender(child.getGender());
+        } else if (Objects.nonNull(child.getComments()) && !"".equalsIgnoreCase(child.getComments())) {
+            existingChild.setComments(child.getComments());
+        } else if (Objects.nonNull(child.getDateOfBirth()) && !"".equalsIgnoreCase(String.valueOf(child.getDateOfBirth()))) {
+            existingChild.setDateOfBirth(child.getDateOfBirth());
+        }
+        return childRepository.save(existingChild);
+    }
 }

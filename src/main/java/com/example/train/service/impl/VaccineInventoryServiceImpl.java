@@ -1,6 +1,7 @@
 package com.example.train.service.impl;
 
 import com.example.train.model.Parent;
+import com.example.train.model.VaccineCenter;
 import com.example.train.model.VaccineInventory;
 import com.example.train.repository.VaccineInventoryRepository;
 import com.example.train.service.VaccineInventoryService;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -33,5 +35,24 @@ public class VaccineInventoryServiceImpl implements VaccineInventoryService {
     public void deleteVaccineInventory(Long id){
         log.info("Delete inventory {} from database",id);
         vaccineInventoryRepository.deleteById(id);
+    }
+
+    public VaccineInventory updateVaccineInventory(Long id, VaccineInventory vaccineInventory){
+        VaccineInventory  existingVaccineInventory = vaccineInventoryRepository.findById(id).get();
+
+        if(Objects.nonNull(vaccineInventory.getQuantity()) && !"".equalsIgnoreCase(String.valueOf(vaccineInventory.getQuantity()))){
+            existingVaccineInventory.setQuantity(vaccineInventory.getQuantity());
+        } else if (Objects.nonNull(vaccineInventory.getVaccinationType()) && !"".equalsIgnoreCase(vaccineInventory.getVaccinationType())) {
+            existingVaccineInventory.setVaccinationType(vaccineInventory.getVaccinationType());
+        }else if (Objects.nonNull(vaccineInventory.getManufactureDate()) && !"".equalsIgnoreCase(String.valueOf(vaccineInventory.getManufactureDate()))) {
+            existingVaccineInventory.setManufactureDate(vaccineInventory.getManufactureDate());
+        }else if (Objects.nonNull(vaccineInventory.getExpireDate()) && !"".equalsIgnoreCase(String.valueOf(vaccineInventory.getExpireDate()))) {
+            existingVaccineInventory.setExpireDate(vaccineInventory.getExpireDate());
+        }else if (Objects.nonNull(vaccineInventory.getManufacturer()) && !"".equalsIgnoreCase(String.valueOf(vaccineInventory.getManufacturer()))) {
+            existingVaccineInventory.setManufacturer(vaccineInventory.getManufacturer());
+        }else if (Objects.nonNull(vaccineInventory.getDescription()) && !"".equalsIgnoreCase(String.valueOf(vaccineInventory.getDescription()))) {
+            existingVaccineInventory.setDescription(vaccineInventory.getDescription());
+        }
+        return vaccineInventoryRepository.save(existingVaccineInventory);
     }
 }

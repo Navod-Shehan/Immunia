@@ -1,5 +1,6 @@
 package com.example.train.controller;
 
+import com.example.train.model.Donation;
 import com.example.train.model.Donor;
 import com.example.train.service.DonorService;
 import io.swagger.annotations.Api;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Api(tags = "Donor")
 @RestController
@@ -33,5 +35,16 @@ public class DonorController {
     public ResponseEntity<Donor> saveDonor(@RequestBody Donor donor){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/donor/save").toUriString());
         return ResponseEntity.created(uri).body(donorService.saveDonor(donor));
+    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Donor> updateDonar(@RequestBody Donor donor, @PathVariable Long id){
+        try{
+//            Student existingStudent = studentService.StudentGet(id);
+            Donor donorNew = donorService.updateDonor(id,donor);
+//            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.ok().body(donorNew);
+        }catch (NoSuchElementException e){
+            return new ResponseEntity<Donor>(HttpStatus.NOT_FOUND);
+        }
     }
 }

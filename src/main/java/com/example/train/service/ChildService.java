@@ -1,5 +1,6 @@
 package com.example.train.service;
 
+import com.example.train.model.AppUser;
 import com.example.train.model.Child;
 import com.example.train.model.Parent;
 
@@ -11,4 +12,6 @@ public interface ChildService {
     Child getChild(Long id);
     void deleteChild(Long id);
     Child getChildWithAppointments(Long childId);
+
+    Child updateChild(Long id, Child child);
 }

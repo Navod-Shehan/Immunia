@@ -1,6 +1,7 @@
 package com.example.train.controller;
 
 import com.example.train.model.Admin;
+import com.example.train.model.Child;
 import com.example.train.model.Parent;
 import com.example.train.service.AdminService;
 import io.swagger.annotations.Api;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Api(tags = "Admin")
 @RestController
@@ -39,17 +41,17 @@ public class AdminController {
         return ResponseEntity.created(uri).body(adminService.saveAdminUser(admin));
     }
 
-//    @PutMapping("/update/{id}")
-//    public ResponseEntity<AppUser> updateAppUser(@RequestBody AppUser appUser, @PathVariable Long id){
-//        try{
-////            Student existingStudent = studentService.StudentGet(id);
-//            AppUser appUserNew = parentRepository.updateAppUser(id,appUser);
-////            return new ResponseEntity<>(HttpStatus.OK);
-//            return ResponseEntity.ok().body(appUserNew);
-//        }catch (NoSuchElementException e){
-//            return new ResponseEntity<AppUser>(HttpStatus.NOT_FOUND);
-//        }
-//    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Admin> updateAdmin(@RequestBody Admin admin, @PathVariable Long id){
+        try{
+//            Student existingStudent = studentService.StudentGet(id);
+            Admin adminNew = adminService.updateAdmin(id,admin);
+//            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.ok().body(adminNew);
+        }catch (NoSuchElementException e){
+            return new ResponseEntity<Admin>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @DeleteMapping("/delete/{id}")
     public String deleteAdminUser(@PathVariable Long id){
