@@ -16,7 +16,7 @@ import java.util.List;
 @Api(tags = "Donor")
 @RestController
 @RequestMapping("/api/donor")
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class DonorController {
     private final DonorService donorService;
