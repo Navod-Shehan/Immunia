@@ -18,7 +18,7 @@ import java.util.NoSuchElementException;
 @Api(tags = "Donor")
 @RestController
 @RequestMapping("/api/donor")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class DonorController {
     private final DonorService donorService;

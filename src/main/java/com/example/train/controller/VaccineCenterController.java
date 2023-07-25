@@ -19,7 +19,7 @@ import java.util.NoSuchElementException;
 @Api(tags = "center")
 @RestController
 @RequestMapping("/api/center")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class VaccineCenterController {
     private final VaccineCenterService vaccineCenterService;

@@ -21,16 +21,27 @@ public class TrainApplication {
         SpringApplication.run(TrainApplication.class, args);
     }
 
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer() {
+//        return new WebMvcConfigurerAdapter() {
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/api/login").allowedOrigins("http://localhost:8080");
+//                registry.addMapping("/api/user/**").allowedOrigins("http://localhost:8080");
+//                registry.addMapping("/api/swagger-ui/**").allowedOrigins("http://localhost:8080");
+//                registry.addMapping("/swagger-ui/**").allowedOrigins("http://localhost:8080");
+//                registry.addMapping("/v2/api-docs").allowedOrigins("http://localhost:8080");
+//                registry.addMapping("/**").allowedOrigins("http://localhost:8080");
+//            }
+//        };
+//    }
+
     @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurerAdapter() {
+    public WebMvcConfigurer corsConfigurer(){
+        return new WebMvcConfigurer() {
             @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/login").allowedOrigins("http://localhost:8080");
-                registry.addMapping("/api/user/**").allowedOrigins("http://localhost:8080");
-                registry.addMapping("/api/swagger-ui/**").allowedOrigins("http://localhost:8080");
-                registry.addMapping("/swagger-ui/**").allowedOrigins("http://localhost:8080");
-                registry.addMapping("/v2/api-docs").allowedOrigins("http://localhost:8080");
+            public void addCorsMappings(CorsRegistry registry){
+                registry.addMapping("/**").allowedOrigins("http://localhost:3000").allowedMethods("GET","POST","PUT","DELETE","PATCH");
             }
         };
     }

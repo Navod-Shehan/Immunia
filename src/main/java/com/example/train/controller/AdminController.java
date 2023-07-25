@@ -19,7 +19,7 @@ import java.util.NoSuchElementException;
 @Api(tags = "Admin")
 @RestController
 @RequestMapping("/api/admin")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class AdminController {
     private final AdminService adminService;

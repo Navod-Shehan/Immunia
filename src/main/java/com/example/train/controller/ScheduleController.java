@@ -20,7 +20,7 @@ import java.util.NoSuchElementException;
 @Api(tags = "Schedule")
 @RestController
 @RequestMapping("/api/schedule")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class ScheduleController {
     private final ScheduleService scheduleService;
