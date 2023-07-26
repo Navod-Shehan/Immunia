@@ -23,6 +23,8 @@ public class Child {
     private String gender;
     private LocalDate DateOfBirth;
     private String comments;
+    private String photoURL;
+    private String birthCertificateURL;
 
     @ManyToOne
     @JoinColumn(name = "id")

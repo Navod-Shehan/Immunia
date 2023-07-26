@@ -3,6 +3,7 @@ package com.example.train.controller;
 import com.example.train.model.Appointment;
 import com.example.train.model.Parent;
 import com.example.train.service.AppointmentService;
+import com.example.train.service.ScheduleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AppointmentController {
     private final AppointmentService appointmentService;
+    private final ScheduleService scheduleService;
     @ApiOperation(value = "all appointments", notes = "Get all appointments")
     @GetMapping("/")
     public ResponseEntity<List<Appointment>> getAppointments(){
@@ -35,6 +37,8 @@ public class AppointmentController {
     @PostMapping("/save")
     public ResponseEntity<Appointment> saveAppointment(@RequestBody Appointment appointment){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/appointment/save").toUriString());
+        Long scheduleId = appointment.getSchedule().getScheduleId();
+        scheduleService.changeStatus(true, scheduleId);
         return ResponseEntity.created(uri).body(appointmentService.saveAppointment(appointment));
     }
 

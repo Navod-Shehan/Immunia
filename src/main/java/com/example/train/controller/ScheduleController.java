@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -33,10 +36,23 @@ public class ScheduleController {
     public ResponseEntity<Schedule> getSchedule(@PathVariable Long id){
         return new ResponseEntity<Schedule>(scheduleService.getSchedule(id), HttpStatus.OK);
     }
+
+    @GetMapping("/date")
+    public ResponseEntity<Schedule[]> getSchedulesByDate(@RequestParam String date, @RequestParam Long id) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1 = sdf.parse(date);
+        return new ResponseEntity<Schedule[]>(scheduleService.getSchedulesByDate(date1, id), HttpStatus.OK);
+    }
     @PostMapping("/save")
     public ResponseEntity<Schedule> saveSchedule(@RequestBody Schedule schedule){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/schedule/save").toUriString());
         return ResponseEntity.created(uri).body(scheduleService.saveSchedule(schedule));
+    }
+
+    @PostMapping("/saveAll")
+    public ResponseEntity<Schedule[]> saveScheduleArray(@RequestBody Schedule[] schedule){
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/schedule/save").toUriString());
+        return ResponseEntity.created(uri).body(scheduleService.saveScheduleArray(schedule));
     }
 
     @PutMapping("/update/{id}")

@@ -5,7 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -15,8 +18,10 @@ public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long scheduleId;
-    private String startTime;
-    private String endTime;
+    private Date scheduleDate;
+    private Time startTime;
+    private Time endTime;
+    private Boolean status = false;
 
     @ManyToOne
     @JoinColumn(name = "id")

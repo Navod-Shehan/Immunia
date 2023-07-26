@@ -29,10 +29,18 @@ public class Appointment {
     @JoinColumn(name = "id")
     private Parent parent;
 
+    @ManyToOne
+    @JoinColumn(name = "vaccineCenterId", referencedColumnName = "id")
+    private VaccineCenter vaccineCenter;
+
 
     @ManyToOne
     @JoinColumn(name = "childId", referencedColumnName = "childId")
     private Child child;
+
+    @OneToOne
+    @JoinColumn(name = "scheduleId")
+    private Schedule schedule;
 
 
 }
