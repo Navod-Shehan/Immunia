@@ -47,6 +47,9 @@ public class AdminServiceImpl implements AdminService {
         } else if (Objects.nonNull(admin.getLastName()) && !"".equalsIgnoreCase(admin.getLastName())) {
             existingAdmin.setLastName(admin.getLastName());
         }
+        else if (Objects.nonNull(admin.getContactNumber()) && !"".equalsIgnoreCase(admin.getContactNumber())) {
+            existingAdmin.setContactNumber(admin.getContactNumber());
+        }
         return adminRepository.save(existingAdmin);
     }
 }
