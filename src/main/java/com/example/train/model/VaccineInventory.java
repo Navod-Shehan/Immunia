@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDate;
+import java.sql.Date;
 
 @Entity
 @Data
@@ -20,8 +20,8 @@ public class VaccineInventory {
     private Long batchNumber;
     private int quantity;
     private String vaccinationType;
-    private LocalDate manufactureDate;
-    private LocalDate expireDate;
+    private Date manufactureDate;
+    private Date expireDate;
     private String manufacturer;
     private String description;
 }
