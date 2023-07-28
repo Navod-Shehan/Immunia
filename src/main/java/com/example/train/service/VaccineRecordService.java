@@ -9,7 +9,7 @@ import java.util.List;
 public interface VaccineRecordService {
     VaccineRecord saveVaccineRecord(VaccineRecord vaccineRecord);
     List<VaccineRecord> getVaccineRecords();
-    VaccineRecord[] getVaccineRecordsByChild(Child child);
+    VaccineRecord[] getVaccineRecordsByChild(Long id);
     VaccineRecord getVaccineRecord(Long id);
 
     VaccineRecord saveWeighRecord(WeightDTO weightDTO);

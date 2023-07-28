@@ -1,5 +1,6 @@
 package com.example.train.model;
 
+import com.example.train.enums.VaccineType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long appointmentId;
-    private String vaccinationName;
+    private VaccineType vaccineType;
     private String parentName;
     private String vaccinationCardNumber;
     private Boolean status;

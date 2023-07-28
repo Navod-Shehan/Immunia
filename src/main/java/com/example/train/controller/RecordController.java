@@ -40,13 +40,15 @@ public class RecordController {
         return new ResponseEntity<VaccineRecord>(vaccineRecordService.getVaccineRecord(id), HttpStatus.OK);
     }
 
-//    @GetMapping("/vaccineRecord/{childId}")
-//    public VaccineRecord[] getVaccineRecordsByChild(@PathVariable Long id){
-//        Child child = new Child();
-//        child.setChildId(id);
-//
-//        return vaccineRecordService.getVaccineRecordsByChild(child);
-//    }
+    @GetMapping("/vaccineRecordByChild/{id}")
+    public VaccineRecord[] getVaccineRecordsByChild(@PathVariable Long id){
+        return vaccineRecordService.getVaccineRecordsByChild(id);
+    }
+
+    @GetMapping("/returnDateByChild/{id}")
+    public ReturnDate[] getReturnDateByChild(@PathVariable Long id){
+        return returnDateService.getReturnDateByChild(id);
+    }
 
     @PostMapping("/vaccineRecord/save")
     public ResponseEntity<VaccineRecord> saveVaccineRecord(@RequestBody VaccineRecord vaccineRecord){

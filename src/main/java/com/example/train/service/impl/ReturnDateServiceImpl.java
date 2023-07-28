@@ -2,6 +2,7 @@ package com.example.train.service.impl;
 
 import com.example.train.model.Child;
 import com.example.train.model.ReturnDate;
+import com.example.train.model.VaccineRecord;
 import com.example.train.repository.ReturnDateRepository;
 import com.example.train.service.ReturnDateService;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,18 @@ public class ReturnDateServiceImpl implements ReturnDateService {
     public ReturnDate getReturnDate(Long id){
         log.info("Get {} return date from database",id);
         return returnDateRepository.findById(id).get();
+    }
+
+    public ReturnDate[] getReturnDateByChild(Long id){
+        log.info("Get {} vaccination record from database");
+        return returnDateRepository.findAll().stream().filter(vaccineRecord ->{
+            Child child = vaccineRecord.getChild();
+            if(child!=null){
+                return child.getChildId().equals(id);
+            }
+            return false;
+
+        } ).toArray(ReturnDate[]::new);
     }
 
     public ReturnDate updateReturnDate(Long id, ReturnDate returnDate){

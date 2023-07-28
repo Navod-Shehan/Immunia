@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Date;
 
 public interface VaccineRecordRepository extends JpaRepository<VaccineRecord, Long> {
-    VaccineRecord[] findByChild(Child child);
+
 }

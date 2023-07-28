@@ -2,6 +2,7 @@ package com.example.train.service.impl;
 
 import com.example.train.dto.WeightDTO;
 import com.example.train.model.Child;
+import com.example.train.model.Schedule;
 import com.example.train.model.VaccineRecord;
 import com.example.train.repository.VaccineRecordRepository;
 import com.example.train.service.VaccineRecordService;
@@ -10,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -45,9 +48,11 @@ public class VaccineRecordServiceImpl implements VaccineRecordService {
         return vaccineRecordRepository.findById(id).get();
     }
 
-    public VaccineRecord[] getVaccineRecordsByChild(Child child){
+    public VaccineRecord[] getVaccineRecordsByChild(Long id){
         log.info("Get {} vaccination record from database");
-        return vaccineRecordRepository.findByChild(child);
+        return vaccineRecordRepository.findAll().stream().filter(vaccineRecord -> vaccineRecord.getChild().getChildId().equals(id)).toArray(VaccineRecord[]::new);
     }
+
+
 
 }
