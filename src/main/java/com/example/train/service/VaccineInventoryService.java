@@ -12,5 +12,7 @@ public interface VaccineInventoryService {
     VaccineInventory getVaccineInventory(Long id);
     void deleteVaccineInventory(Long id);
 
+    Boolean decreaseVaccineInventory(Long id);
+
     VaccineInventory updateVaccineInventory(Long id, VaccineInventory vaccineInventory);
 }

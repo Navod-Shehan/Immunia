@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -37,6 +38,33 @@ public class VaccineInventoryServiceImpl implements VaccineInventoryService {
         vaccineInventoryRepository.deleteById(id);
     }
 
+    public Boolean decreaseVaccineInventory(Long id){
+
+        // First, fetch the vaccine from the repository using the provided ID
+        Optional<VaccineInventory> optionalVaccineInventory = vaccineInventoryRepository.findById(id);
+
+// Check if the vaccine with the given ID exists in the repository
+        if (optionalVaccineInventory.isPresent()) {
+            // Get the Vaccine object from the Optional
+            VaccineInventory vaccineInventory = optionalVaccineInventory.get();
+
+            // Get the current quantity of the vaccine
+            int currentQuantity = vaccineInventory.getQuantity();
+
+            // Decrease the quantity by one
+            int newQuantity = currentQuantity - 1;
+
+            // Set the new quantity back to the Vaccine object
+            vaccineInventory.setQuantity(newQuantity);
+
+            // Save the updated Vaccine object back to the repository
+            vaccineInventoryRepository.save(vaccineInventory);
+            return true;
+        }
+
+        return false;
+    }
+
     public VaccineInventory updateVaccineInventory(Long id, VaccineInventory vaccineInventory){
         VaccineInventory  existingVaccineInventory = vaccineInventoryRepository.findById(id).get();
 
@@ -55,4 +83,6 @@ public class VaccineInventoryServiceImpl implements VaccineInventoryService {
         }
         return vaccineInventoryRepository.save(existingVaccineInventory);
     }
+
+
 }

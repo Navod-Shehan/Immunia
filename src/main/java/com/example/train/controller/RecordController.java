@@ -1,5 +1,7 @@
 package com.example.train.controller;
 
+import com.example.train.dto.VaccineRecordDTO;
+import com.example.train.dto.WeightDTO;
 import com.example.train.model.Child;
 import com.example.train.model.ReturnDate;
 import com.example.train.model.VaccineRecord;
@@ -38,10 +40,33 @@ public class RecordController {
         return new ResponseEntity<VaccineRecord>(vaccineRecordService.getVaccineRecord(id), HttpStatus.OK);
     }
 
+//    @GetMapping("/vaccineRecord/{childId}")
+//    public VaccineRecord[] getVaccineRecordsByChild(@PathVariable Long id){
+//        Child child = new Child();
+//        child.setChildId(id);
+//
+//        return vaccineRecordService.getVaccineRecordsByChild(child);
+//    }
+
     @PostMapping("/vaccineRecord/save")
     public ResponseEntity<VaccineRecord> saveVaccineRecord(@RequestBody VaccineRecord vaccineRecord){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/records/vaccineRecord/save").toUriString());
         return ResponseEntity.created(uri).body(vaccineRecordService.saveVaccineRecord(vaccineRecord));
+    }
+
+    @PostMapping("/weightRecord/submit")
+    public ResponseEntity<VaccineRecord> saveWeightRecords(@RequestBody WeightDTO weightDTO){
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/records/weightRecord/submit").toUriString());
+        return ResponseEntity.created(uri).body(vaccineRecordService.saveWeighRecord(weightDTO));
+    }
+
+    @PostMapping("/vaccineRecord/submit")
+    public ResponseEntity<VaccineRecordDTO> submitVaccineRecord(@RequestBody VaccineRecordDTO vaccineRecordDTO){
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/records/vaccineRecord/submit").toUriString());
+        vaccineRecordService.saveVaccineRecord(vaccineRecordDTO.getVaccineRecord());
+        returnDateService.createOrUpdateReturnDate(vaccineRecordDTO.getReturnDate());
+
+        return ResponseEntity.ok().body(vaccineRecordDTO);
     }
 
     @GetMapping("/returnDate/{id}")

@@ -1,5 +1,6 @@
 package com.example.train.service.impl;
 
+import com.example.train.model.Child;
 import com.example.train.model.ReturnDate;
 import com.example.train.repository.ReturnDateRepository;
 import com.example.train.service.ReturnDateService;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,22 +21,21 @@ public class ReturnDateServiceImpl implements ReturnDateService {
     private final ReturnDateRepository returnDateRepository;
 
     @Override
-    public void createOrUpdateReturnDate(ReturnDate returnDate) {
-        // Check if the ReturnDate table is empty
-        if (returnDateRepository.count() == 0) {
+    public void createOrUpdateReturnDate(ReturnDate newReturnDate) {
+        Optional<ReturnDate>  exsistReturnDate = Optional.ofNullable(returnDateRepository.findByChild(newReturnDate.getChild()));
+
+        if(exsistReturnDate.isPresent()){
+            ReturnDate returnDate = exsistReturnDate.get();
+
+            returnDate.setReturnDate(newReturnDate.getReturnDate());
+            returnDate.setDosage(newReturnDate.getDosage());
+            returnDate.setVaccineType(newReturnDate.getVaccineType());
+
             returnDateRepository.save(returnDate);
-        } else {
-            // Get the existing ReturnDate entity (assuming there is only one)
-            ReturnDate existingReturnDate = returnDateRepository.findAll().get(0);
-
-            // Update the existing ReturnDate entity with the values from the input ReturnDate
-            existingReturnDate.setVaccineType(returnDate.getVaccineType());
-            existingReturnDate.setDosage(returnDate.getDosage());
-            existingReturnDate.setReturnDate(returnDate.getReturnDate());
-
-            // Save the updated ReturnDate entity
-            returnDateRepository.save(existingReturnDate);
+        } else{
+            returnDateRepository.save(newReturnDate);
         }
+
     }
     public ReturnDate getReturnDate(Long id){
         log.info("Get {} return date from database",id);
