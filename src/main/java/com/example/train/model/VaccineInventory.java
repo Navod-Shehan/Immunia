@@ -17,6 +17,7 @@ import java.sql.Date;
 public class VaccineInventory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long inventoryId;
     private Long batchNumber;
     private int quantity;
     private String vaccinationType;
