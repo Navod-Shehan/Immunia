@@ -1,13 +1,11 @@
 package com.example.train.model;
 
+import com.example.train.enums.VaccineType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
@@ -20,9 +18,13 @@ public class VaccineInventory {
     private Long inventoryId;
     private Long batchNumber;
     private int quantity;
-    private String vaccinationType;
+    private VaccineType vaccineType;
     private Date manufactureDate;
     private Date expireDate;
     private String manufacturer;
     private String description;
+
+    @OneToOne
+    @JoinColumn(name = "id") // Specify the foreign key column name
+    private VaccineCenter vaccineCenter;
 }

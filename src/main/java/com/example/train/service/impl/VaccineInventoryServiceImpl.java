@@ -22,7 +22,7 @@ public class VaccineInventoryServiceImpl implements VaccineInventoryService {
     private final VaccineInventoryRepository vaccineInventoryRepository;
 
     public VaccineInventory saveVaccineInventory(VaccineInventory vaccineInventory){
-        log.info("Saving vaccine inventory {} to the database",vaccineInventory.getVaccinationType());
+        log.info("Saving vaccine inventory {} to the database",vaccineInventory.getVaccineType());
         return vaccineInventoryRepository.save(vaccineInventory);
     }
     public List<VaccineInventory> getVaccineInventories(){
@@ -68,17 +68,17 @@ public class VaccineInventoryServiceImpl implements VaccineInventoryService {
     public VaccineInventory updateVaccineInventory(Long id, VaccineInventory vaccineInventory){
         VaccineInventory  existingVaccineInventory = vaccineInventoryRepository.findById(id).get();
 
-        if(Objects.nonNull(vaccineInventory.getQuantity()) && !"".equalsIgnoreCase(String.valueOf(vaccineInventory.getQuantity()))){
+        if(Objects.nonNull(vaccineInventory.getQuantity()) ){
             existingVaccineInventory.setQuantity(vaccineInventory.getQuantity());
-        } else if (Objects.nonNull(vaccineInventory.getVaccinationType()) && !"".equalsIgnoreCase(vaccineInventory.getVaccinationType())) {
-            existingVaccineInventory.setVaccinationType(vaccineInventory.getVaccinationType());
-        }else if (Objects.nonNull(vaccineInventory.getManufactureDate()) && !"".equalsIgnoreCase(String.valueOf(vaccineInventory.getManufactureDate()))) {
+        } else if (Objects.nonNull(vaccineInventory.getVaccineType())) {
+            existingVaccineInventory.setVaccineType(vaccineInventory.getVaccineType());
+        }else if (Objects.nonNull(vaccineInventory.getManufactureDate())) {
             existingVaccineInventory.setManufactureDate(vaccineInventory.getManufactureDate());
-        }else if (Objects.nonNull(vaccineInventory.getExpireDate()) && !"".equalsIgnoreCase(String.valueOf(vaccineInventory.getExpireDate()))) {
+        }else if (Objects.nonNull(vaccineInventory.getExpireDate())) {
             existingVaccineInventory.setExpireDate(vaccineInventory.getExpireDate());
-        }else if (Objects.nonNull(vaccineInventory.getManufacturer()) && !"".equalsIgnoreCase(String.valueOf(vaccineInventory.getManufacturer()))) {
+        }else if (Objects.nonNull(vaccineInventory.getManufacturer())) {
             existingVaccineInventory.setManufacturer(vaccineInventory.getManufacturer());
-        }else if (Objects.nonNull(vaccineInventory.getDescription()) && !"".equalsIgnoreCase(String.valueOf(vaccineInventory.getDescription()))) {
+        }else if (Objects.nonNull(vaccineInventory.getDescription())) {
             existingVaccineInventory.setDescription(vaccineInventory.getDescription());
         }
         return vaccineInventoryRepository.save(existingVaccineInventory);
