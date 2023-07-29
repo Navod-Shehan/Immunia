@@ -24,7 +24,7 @@ public class VaccineInventory {
     private String manufacturer;
     private String description;
 
-    @OneToOne
-    @JoinColumn(name = "id") // Specify the foreign key column name
+    @ManyToOne
+    @JoinColumn(name = "id")
     private VaccineCenter vaccineCenter;
 }
